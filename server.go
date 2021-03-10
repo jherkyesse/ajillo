@@ -1,8 +1,8 @@
 package main
 
 import (
-	"ajillo/graph"
-	"ajillo/graph/generated"
+	"ajillo/generated"
+	resolver "ajillo/resolvers"
 	"log"
 	"net/http"
 	"os"
@@ -19,7 +19,7 @@ func main() {
 		port = defaultPort
 	}
 
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &resolver.Resolver{}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
